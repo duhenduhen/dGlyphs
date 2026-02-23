@@ -1,0 +1,39 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'org.duhen.dglyphs'
+    compileSdk {
+        version = release(36)
+    }
+
+    defaultConfig {
+        applicationId "org.duhen.dglyphs"
+        minSdk 33
+        targetSdk 36
+        versionCode 1
+        versionName "1.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation libs.material
+    implementation libs.appcompat.v161
+    implementation libs.constraintlayout
+    implementation "com.github.topjohnwu.libsu:core:6.0.0"
+}

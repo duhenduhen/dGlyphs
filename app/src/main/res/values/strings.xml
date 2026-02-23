@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name" translatable="false">dGlyphs</string>
+    <string name="main_header">Glyph Interface</string>
+    <string name="card_ringtones">Ringtones</string>
+    <string name="card_notifications">Notifications</string>
+    <string name="master_switch_label">Glyphs Lights</string>
+    <string name="tile_master_label">Glyphs</string>
+    <string name="tile_light_label">Glyph Light</string>
+    <string name="flip_to_glyph_label">Flip to Glyph</string>
+    <string name="flip_to_glyph_desc">Place the phone face down to silence notifications and use glyph blinks</string>
+	<string name="pref_file">Glyph Settings</string>
+    <string name="style_title">Notification Style</string>
+    <string name="cancel">Cancel</string>
+	<string-array name="notif_style_names">
+        <item>Static</item>
+        <item>Pulse</item>
+        <item>Quick Blink</item>
+        <item>oi!</item>
+        <item>nope</item>
+        <item>why</item>
+        <item>bulb one</item>
+        <item>bulb two</item>
+        <item>guiro</item>
+        <item>squiggle</item>
+    </string-array>
+    <string-array name="call_style_names">
+        <item>Static</item>
+        <item>Blink</item>
+        <item>pneumatic</item>
+        <item>abra</item>
+        <item>squirrels</item>
+        <item>snaps</item>
+        <item>radiate</item>
+        <item>tennis</item>
+        <item>plot</item>
+        <item>scribble</item>
+    </string-array>
+    <string name="root_error_title">Root Error</string>
+    <string name="root_error_message">This application requires root privileges to function. Please grant root access and restart the app.</string>
+    <string name="exit">Exit</string>
+    <string name="features">Features</string>
+    <string name="schedule">Schedule</string>
+    <string name="sleep_mode">Sleep mode</string>
+    <string name="sleep_picker_start">Start time</string>
+    <string name="sleep_picker_end">End time</string>
+    <string name="sleep_time_format">%1$s — %2$s</string>
+    <string name="dialog_permission_notif_title">Notification Access</string>
+    <string name="dialog_permission_notif_message">The app needs notification access to control Glyph lighting when new messages arrive.</string>
+    <string name="dialog_permission_call_title">Phone Calls Access</string>
+    <string name="dialog_permission_call_message">This is required for the Glyph interface to work during an incoming call.</string>
+    <string name="btn_settings">Settings</string>
+    <string name="btn_grant">Grant</string>
+</resources>
