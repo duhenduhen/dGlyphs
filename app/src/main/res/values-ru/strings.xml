@@ -42,7 +42,7 @@
     <string name="schedule">Расписание</string>
     <string name="sleep_mode">Режим сна</string>
     <string name="sleep_picker_start">Время начала</string>
-    <string name="sleep_picker_end">Время конца</string>
+    <string name="sleep_picker_end">Время завершения</string>
     <string name="sleep_time_format">%1$s — %2$s</string>
     <string name="dialog_permission_notif_title">Доступ к уведомлениям</string>
     <string name="dialog_permission_notif_message">Приложению нужен доступ к уведомлениям, чтобы управлять Glyph-подсветкой при входящих сообщениях.</string>
