@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
@@ -49,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
         prefs = getSharedPreferences(getString(R.string.pref_file), MODE_PRIVATE);
         vibrator = getSystemService(Vibrator.class);
         initViews();
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     setupInitialState();
                     setupListeners();
                     checkAllPermissions();
+                    setupSmoothCollapse();
                 });
             } else {
                 runOnUiThread(this::showRootError);
@@ -265,6 +275,29 @@ public class MainActivity extends AppCompatActivity {
 
     private float mapBrightnessToPosition(int b) {
         return b >= 4095 ? 4f : b >= 2048 ? 3f : b >= 1024 ? 2f : 1f;
+    }
+
+    private void setupSmoothCollapse() {
+        AppBarLayout appBar = findViewById(R.id.appBarLayout);
+        CollapsingToolbarLayout ctl = findViewById(R.id.collapsingToolbar);
+        if (appBar == null || ctl == null) return;
+
+        android.util.TypedValue typedValue = new android.util.TypedValue();
+        getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurface, typedValue, true);
+        int colorOnSurface = typedValue.data;
+
+        appBar.addOnOffsetChangedListener((bar, verticalOffset) -> {
+            int totalScrollRange = bar.getTotalScrollRange();
+            if (totalScrollRange == 0) return;
+
+            float fraction = Math.abs((float) verticalOffset / totalScrollRange);
+
+            float smooth = fraction * fraction * (3f - 2f * fraction);
+
+            int alpha = (int) (255 * (1f - smooth));
+            int color = (alpha << 24) | (colorOnSurface & 0x00FFFFFF);
+            ctl.setExpandedTitleColor(color);
+        });
     }
 
     private void showRootError() {

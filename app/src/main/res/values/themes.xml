@@ -11,4 +11,17 @@
     </style>
 
     <style name="Theme.DGlyphs" parent="Base.Theme.DGlyphs" />
+
+    <style name="TextAppearance.CollapsingHeader" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:fontFamily">@font/ndot_57</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.CollapsingHeaderSmall" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:fontFamily">@font/ndot_57</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
 </resources>
