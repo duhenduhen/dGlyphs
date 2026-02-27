@@ -19,6 +19,7 @@ public class CallReceiver extends BroadcastReceiver {
         SharedPreferences prefs = context.getSharedPreferences(context.getString(R.string.pref_file), Context.MODE_PRIVATE);
 
         if (!prefs.getBoolean("master_allow", false)) return;
+        if (SleepGuard.isBlocked(prefs)) return;
 
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
 

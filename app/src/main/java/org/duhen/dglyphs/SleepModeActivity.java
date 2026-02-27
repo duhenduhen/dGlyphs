@@ -58,7 +58,7 @@ public class SleepModeActivity extends AppCompatActivity {
         int[] ids = {R.id.day_1, R.id.day_2, R.id.day_3, R.id.day_4, R.id.day_5, R.id.day_6, R.id.day_7};
         for (int i = 0; i < ids.length; i++) {
             MaterialButton btn = findViewById(ids[i]);
-            String dId = String.valueOf(i + 1);
+            final String dId = String.valueOf(i + 1);
             updateDayUI(btn, selectedDays.contains(dId));
 
             btn.setOnClickListener(v -> {

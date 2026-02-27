@@ -68,12 +68,13 @@ public class FlipToGlyphService extends Service implements SensorEventListener {
     }
 
     private void triggerEffect(String prefKey) {
-        if (isSleepTime()) return;
+        if (SleepGuard.isBlocked(prefs)) return;
         new Thread(() -> runEffect(prefs.getString(prefKey, "static"))).start();
     }
 
     private void startCallBlinking() {
         if (isRinging) return;
+        if (SleepGuard.isBlocked(prefs)) return;
         isRinging = true;
         new Thread(() -> {
             String style = prefs.getString("call_style_value", "static");
@@ -129,18 +130,6 @@ public class FlipToGlyphService extends Service implements SensorEventListener {
         isActive = false;
         audioManager.setRingerMode(originalRingerMode);
         updateHardware(0);
-    }
-
-    private boolean isSleepTime() {
-        if (!prefs.getBoolean("sleep_mode_enabled", false)) return false;
-        try {
-            String[] s = prefs.getString("sleep_start", "23:00").split(":");
-            String[] e = prefs.getString("sleep_end", "07:00").split(":");
-            int startMin = Integer.parseInt(s[0]) * 60 + Integer.parseInt(s[1]);
-            int endMin = Integer.parseInt(e[0]) * 60 + Integer.parseInt(e[1]);
-            int nowMin = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) * 60 + Calendar.getInstance().get(Calendar.MINUTE);
-            return startMin < endMin ? (nowMin >= startMin && nowMin <= endMin) : (nowMin >= startMin || nowMin <= endMin);
-        } catch (Exception ex) { return false; }
     }
 
     @Override public void onAccuracyChanged(Sensor sensor, int accuracy) {}

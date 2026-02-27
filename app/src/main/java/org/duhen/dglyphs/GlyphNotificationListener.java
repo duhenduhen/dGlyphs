@@ -18,6 +18,8 @@ public class GlyphNotificationListener extends NotificationListenerService {
 
         if (prefs.getBoolean("master_allow", false)) {
 
+            if (SleepGuard.isBlocked(prefs)) return;
+
             if (prefs.getBoolean("lockscreen_only", false)) {
                 PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
                 KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
