@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentBrightness;
 
     private MaterialCardView cardNotifications, cardRingtones, cardFlipStyle, cardTurnOff, cardSleepTime, cardBrightness, cardBattery;
-    private TextView textCurrentCallStyle, textCurrentNotifStyle, textCurrentFlipStyle, textSleepTime;
+    private TextView textCurrentCallStyle, textCurrentNotifStyle, textSleepTime;
     private MaterialSwitch switchSleepMode, switchAll, switchFlip, switchBattery, switchLockscreenOnly;
     private Slider slider;
     private Runnable previewRunnable;
@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
         textCurrentCallStyle = findViewById(R.id.textCurrentCallStyle);
         textCurrentNotifStyle = findViewById(R.id.textCurrentNotifStyle);
-        textCurrentFlipStyle = findViewById(R.id.textCurrentFlipStyle);
         textSleepTime = findViewById(R.id.textSleepTime);
 
         slider = findViewById(R.id.sliderMain);
@@ -212,7 +211,8 @@ public class MainActivity extends AppCompatActivity {
                     currentBrightness = brightness;
                     prefs.edit().putInt("brightness", currentBrightness).apply();
                     if (isMasterAllowed) {
-                        if (previewRunnable != null) previewHandler.removeCallbacks(previewRunnable);
+                        if (previewRunnable != null)
+                            previewHandler.removeCallbacks(previewRunnable);
                         updateHardware(currentBrightness);
                         previewRunnable = () -> updateHardware(0);
                         previewHandler.postDelayed(previewRunnable, 1500);
@@ -259,8 +259,6 @@ public class MainActivity extends AppCompatActivity {
             textCurrentNotifStyle.setText(notifStyleValues[Math.min(nIdx, notifStyleValues.length - 1)]);
         if (callStyleValues.length > 0)
             textCurrentCallStyle.setText(callStyleValues[Math.min(cIdx, callStyleValues.length - 1)]);
-        if (notifStyleValues.length > 0)
-            textCurrentFlipStyle.setText(notifStyleValues[Math.min(fIdx, notifStyleValues.length - 1)]);
     }
 
     private void checkAllPermissions() {
@@ -308,7 +306,8 @@ public class MainActivity extends AppCompatActivity {
     private void updateTile() {
         try {
             TileService.requestListeningState(this, new ComponentName(this, MasterTileService.class));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     private int mapPositionToBrightness(float p) {

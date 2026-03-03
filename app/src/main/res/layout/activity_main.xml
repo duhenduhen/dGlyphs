@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,14 +21,14 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/TextAppearance.CollapsingHeaderSmall"
-            app:expandedTitleMarginStart="22dp"
+            app:contentScrim="?attr/colorSurface"
             app:expandedTitleMarginBottom="28dp"
+            app:expandedTitleMarginStart="22dp"
             app:expandedTitleTextAppearance="@style/TextAppearance.CollapsingHeader"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:scrimAnimationDuration="300"
             app:title="@string/main_header"
-            app:titleCollapseMode="fade"
-            app:contentScrim="?attr/colorSurface"
-            app:scrimAnimationDuration="300">
+            app:titleCollapseMode="fade">
 
             <View
                 android:layout_width="match_parent"
@@ -130,16 +129,16 @@
                                 android:id="@+id/iconRingtones"
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:layout_alignParentTop="true"
                                 android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
                                 android:src="@drawable/ic_music_note"
                                 app:tint="?attr/colorOnSurface" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentBottom="true"
                                 android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -180,16 +179,16 @@
                                 android:id="@+id/iconNotifications"
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:layout_alignParentTop="true"
                                 android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
                                 android:src="@drawable/ic_notif"
                                 app:tint="?attr/colorOnSurface" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentBottom="true"
                                 android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -253,152 +252,219 @@
                 android:textColor="?attr/colorPrimary"
                 android:textSize="12sp" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardFlipStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
+                android:layout_height="190dp"
                 android:layout_marginTop="12dp"
-                app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="28dp"
-                app:strokeWidth="0dp">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="24dp">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardFlipStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                    app:cardCornerRadius="28dp"
+                    app:strokeWidth="0dp">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="16dp"
-                        android:orientation="vertical">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                        <TextView
+                        <ImageView
+                            android:id="@+id/iconFlip"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_flip"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="?attr/colorOnSurface" />
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switchFlip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintBottom_toBottomOf="@id/iconFlip"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/iconFlip" />
+
+                        <TextView
+                            android:id="@+id/textFlipTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="2dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:text="@string/flip_to_glyph_label"
                             android:textColor="?attr/colorOnSurface"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@id/textFlipDesc"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/textFlipDesc"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="@string/flip_to_glyph_desc"
                             android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="13sp" />
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
-                        <TextView
-                            android:id="@+id/textCurrentFlipStyle"
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTurnOff"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                    app:cardCornerRadius="28dp"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iconLock"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_lock"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="?attr/colorOnSurface" />
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switchLockscreenOnly"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:textColor="?attr/colorOutline"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switchFlip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardTurnOff"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginTop="12dp"
-                app:cardBackgroundColor="?attr/colorSurfaceContainer"
-                app:cardCornerRadius="28dp"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="24dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                            android:layout_marginEnd="20dp"
+                            app:layout_constraintBottom_toBottomOf="@id/iconLock"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/iconLock" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/textTurnOffTitle"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="2dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:text="@string/turn_off_label"
                             android:textColor="?attr/colorOnSurface"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@id/textTurnOffDesc"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/textTurnOffDesc"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="@string/turn_off_desc"
                             android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switchLockscreenOnly"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardBattery"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:layout_marginHorizontal="6dp"
                 android:layout_marginTop="12dp"
                 app:cardBackgroundColor="?attr/colorSurfaceContainer"
                 app:cardCornerRadius="28dp"
                 app:strokeWidth="0dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="24dp">
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="16dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/battery_glyph_label"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/battery_glyph_desc"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iconBattery"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:src="@drawable/ic_battery"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="?attr/colorOnSurface" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchBattery"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        app:layout_constraintBottom_toBottomOf="@id/iconBattery"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/iconBattery" />
+
+                    <TextView
+                        android:id="@+id/textBatteryTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/battery_glyph_label"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@id/textBatteryDesc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textBatteryDesc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="24dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/battery_glyph_desc"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -413,7 +479,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardSleepTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:layout_marginHorizontal="6dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="32dp"
@@ -421,48 +487,70 @@
                 app:cardCornerRadius="28dp"
                 app:strokeWidth="0dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="24dp">
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/sleep_mode"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/textSleepTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="23:00 — 07:00"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iconSleep"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:src="@drawable/ic_sleep"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="?attr/colorOnSurface" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchSleepMode"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        app:layout_constraintBottom_toBottomOf="@id/iconSleep"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/iconSleep" />
+
+                    <TextView
+                        android:id="@+id/textSleepTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/sleep_mode"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@id/textSleepTime"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textSleepTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="24dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="23:00 — 07:00"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:layout_marginHorizontal="18dp"
+                android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
                 <ImageView
