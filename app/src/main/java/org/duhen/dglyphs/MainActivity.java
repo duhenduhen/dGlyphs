@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 .setSingleChoiceItems(values, currentIdx, (dialog, which) -> {
                     selectedIdx[0] = which;
                     if (isMasterAllowed) {
-                        GlyphEffects.play(this, folder, values[which], vibrator);
+                        GlyphEffects.play(this, folder, values[which], vibrator, currentBrightness);
                     }
                 })
                 .setPositiveButton(R.string.apply, (dialog, which) -> {

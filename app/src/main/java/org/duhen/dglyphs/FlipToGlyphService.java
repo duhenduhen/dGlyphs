@@ -77,7 +77,8 @@ public class FlipToGlyphService extends Service implements SensorEventListener {
         if (SleepGuard.isBlocked(prefs)) return;
         if (wakeLock != null && !wakeLock.isHeld()) wakeLock.acquire(3000);
         String style = prefs.getString(PREF_BLINK_STYLE_VALUE, "");
-        if (!style.isEmpty()) GlyphEffects.play(this, "notification", style, vibrator);
+        if (!style.isEmpty()) GlyphEffects.play(this, "notification", style, vibrator, prefs.getInt("brightness", 2048));
+
     }
 
     private void startCallLoop() {
@@ -93,7 +94,7 @@ public class FlipToGlyphService extends Service implements SensorEventListener {
         if (style.isEmpty()) return;
 
         if (wakeLock != null && !wakeLock.isHeld()) wakeLock.acquire(5000);
-        GlyphEffects.play(this, "call", style, vibrator);
+        GlyphEffects.play(this, "call", style, vibrator, prefs.getInt("brightness", 2048));
 
         callLoopRunnable = this::scheduleNextCallCycle;
         handler.postDelayed(callLoopRunnable, getCallStyleDuration(style));
@@ -153,7 +154,8 @@ public class FlipToGlyphService extends Service implements SensorEventListener {
         if (SleepGuard.isBlocked(prefs)) return;
         if (wakeLock != null && !wakeLock.isHeld()) wakeLock.acquire(3000);
         String style = prefs.getString("flip_style_value", "");
-        if (!style.isEmpty()) GlyphEffects.play(this, "notification", style, vibrator);
+        if (!style.isEmpty()) GlyphEffects.play(this, "notification", style, vibrator, prefs.getInt("brightness", 2048));
+
     }
 
     private void deactivateFlipMode() {

@@ -20,9 +20,10 @@ public class GlyphEffects {
             GlyphManager.Glyph.DOT
     };
 
-    public static void play(Context context, String folder, String fileName, Vibrator vibrator) {
+    public static void play(Context context, String folder, String fileName, Vibrator vibrator, int brightness) {
         stop();
         Context appCtx = context.getApplicationContext();
+        float scale = (float) brightness / GlyphManager.MAX_BRIGHTNESS;
 
         currentThread = new Thread(() -> {
             try (InputStream is = appCtx.getAssets().open(folder + "/" + fileName + ".csv");
@@ -38,11 +39,11 @@ public class GlyphEffects {
                     if (vals.length < GLYPH_ORDER.length) continue;
 
                     try {
-                        int[] brightness = new int[GLYPH_ORDER.length];
+                        int[] bright = new int[GLYPH_ORDER.length];
                         boolean anyNonZero = false;
                         for (int i = 0; i < GLYPH_ORDER.length; i++) {
-                            brightness[i] = Integer.parseInt(vals[i]);
-                            if (brightness[i] > 0) anyNonZero = true;
+                            bright[i] = Math.round(Integer.parseInt(vals[i]) * scale);
+                            if (bright[i] > 0) anyNonZero = true;
                         }
 
                         if (anyNonZero && !vibratedThisCycle) {
@@ -52,10 +53,9 @@ public class GlyphEffects {
                         if (!anyNonZero) vibratedThisCycle = false;
 
                         for (int i = 0; i < GLYPH_ORDER.length; i++) {
-                            GlyphManager.setBrightness(GLYPH_ORDER[i], brightness[i]);
+                            GlyphManager.setBrightness(GLYPH_ORDER[i], bright[i]);
                         }
-                    } catch (NumberFormatException e) {
-                    }
+                    } catch (NumberFormatException ignored) {}
 
                     try {
                         Thread.sleep(FRAME_DURATION);
@@ -64,7 +64,7 @@ public class GlyphEffects {
                         break;
                     }
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             } finally {
                 GlyphManager.toggleAll(false);
             }
