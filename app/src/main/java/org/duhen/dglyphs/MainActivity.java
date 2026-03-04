@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     setupInitialState();
                     setupListeners();
                     checkAllPermissions();
-                    setupSmoothCollapse();
+                    setupCollapse();
                 });
             } else {
                 runOnUiThread(this::showRootError);
@@ -318,23 +318,20 @@ public class MainActivity extends AppCompatActivity {
         return b >= 4095 ? 4f : b >= 2048 ? 3f : b >= 1024 ? 2f : 1f;
     }
 
-    private void setupSmoothCollapse() {
+    private void setupCollapse() {
         AppBarLayout appBar = findViewById(R.id.appBarLayout);
         CollapsingToolbarLayout ctl = findViewById(R.id.collapsingToolbar);
         if (appBar == null || ctl == null) return;
 
-        android.util.TypedValue typedValue = new android.util.TypedValue();
-        getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurface, typedValue, true);
-        int colorOnSurface = typedValue.data;
+        android.util.TypedValue tv = new android.util.TypedValue();
+        getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurface, tv, true);
+        int baseColor = tv.data & 0x00FFFFFF;
 
         appBar.addOnOffsetChangedListener((bar, verticalOffset) -> {
-            int totalScrollRange = bar.getTotalScrollRange();
-            if (totalScrollRange == 0) return;
-            float fraction = Math.abs((float) verticalOffset / totalScrollRange);
-            float smooth = fraction * fraction * (3f - 2f * fraction);
-            int alpha = (int) (255 * (1f - smooth));
-            int color = (alpha << 24) | (colorOnSurface & 0x00FFFFFF);
-            ctl.setExpandedTitleColor(color);
+            int total = bar.getTotalScrollRange();
+            if (total == 0) return;
+            int alpha = (int) (255 * (1f - (float) Math.abs(verticalOffset) / total));
+            ctl.setExpandedTitleColor((alpha << 24) | baseColor);
         });
     }
 
