@@ -14,7 +14,7 @@ It was originally created for ported roms that don't have Glyphs.
 - Sleep mode
 - Monet theme and nice UI =)
 
-## Screenshots (2.0)
+## Screenshots (2.1)
 <table>
   <tr>
     <td><img src="screenshots/main.jpg" width="200"></td>
