@@ -40,6 +40,7 @@ public class SleepModeActivity extends AppCompatActivity {
 
     private void initViews() {
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         tvStart = findViewById(R.id.tvStartTime);
         tvEnd = findViewById(R.id.tvEndTime);
 
