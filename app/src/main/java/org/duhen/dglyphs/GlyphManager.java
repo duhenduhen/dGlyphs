@@ -2,7 +2,7 @@ package org.duhen.dglyphs;
 
 import com.topjohnwu.superuser.Shell;
 
-// "inspiration" from myglyph
+// thanks to myglyph for initial glyph manager impl
 
 public class GlyphManager {
     public static final int MAX_BRIGHTNESS = 4095;
@@ -12,6 +12,16 @@ public class GlyphManager {
         if (!Shell.getShell().isRoot()) return;
         int safeBrightness = Math.max(0, Math.min(brightness, MAX_BRIGHTNESS));
         Shell.cmd("echo " + safeBrightness + " > " + glyph.path).submit();
+    }
+
+    public static void setFrame(int[] values) {
+        if (values == null) return;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < values.length; i++) {
+            sb.append(Math.max(0, Math.min(values[i], MAX_BRIGHTNESS)));
+            if (i < values.length - 1) sb.append(" ");
+        }
+        Shell.cmd("echo " + sb + " > " + PATH_ROOT + "/frame_leds_effect").submit();
     }
 
     public static void toggleAll(boolean turnOn) {

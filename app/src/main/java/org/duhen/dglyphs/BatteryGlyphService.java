@@ -117,48 +117,37 @@ public class BatteryGlyphService extends Service {
             }
         }
 
-        int level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        final int level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
 
         animationFuture = executor.submit(() -> {
             int brightness = prefs.getInt("brightness", 2048);
-            int targetBrightness = (int) (brightness * Math.max(0.05f, level / 100f));
+            int segmentsToLight = Math.max(1, (level * 8) / 100);
 
             try {
-                for (int b = 0; b <= brightness; b += Math.max(1, brightness / 40)) {
-                    if (!isCharging) throw new InterruptedException();
-                    GlyphManager.setBrightness(GlyphManager.Glyph.LINE, b);
-                    GlyphManager.setBrightness(GlyphManager.Glyph.DOT, b);
-                    SystemClock.sleep(15);
-                }
-                GlyphManager.setBrightness(GlyphManager.Glyph.LINE, brightness);
                 GlyphManager.setBrightness(GlyphManager.Glyph.DOT, brightness);
 
-                for (int b = brightness; b > targetBrightness; b -= Math.max(1, brightness / 60)) {
+                int[] frame = new int[15];
+                frame[6] = brightness;
+
+                for (int s = 0; s < segmentsToLight; s++) {
                     if (!isCharging) throw new InterruptedException();
-                    GlyphManager.setBrightness(GlyphManager.Glyph.LINE, b);
+                    frame[7 + s] = brightness;
+                    GlyphManager.setFrame(frame);
+                    SystemClock.sleep(60);
+                }
+
+                SystemClock.sleep(2000);
+
+                for (int b = brightness; b >= 0; b -= 200) {
+                    if (!isCharging) throw new InterruptedException();
                     GlyphManager.setBrightness(GlyphManager.Glyph.DOT, b);
-                    SystemClock.sleep(5);
+                    for (int i = 7; i < 15; i++) if (frame[i] > 0) frame[i] = b;
+                    GlyphManager.setFrame(frame);
+                    SystemClock.sleep(20);
                 }
-                GlyphManager.setBrightness(GlyphManager.Glyph.LINE, targetBrightness);
-                GlyphManager.setBrightness(GlyphManager.Glyph.DOT, targetBrightness);
-
-                long pauseStart = SystemClock.elapsedRealtime();
-                while (SystemClock.elapsedRealtime() - pauseStart < 2000) {
-                    if (!isCharging) throw new InterruptedException();
-                    SystemClock.sleep(50);
-                }
-
-                for (int b = targetBrightness; b >= 0; b -= Math.max(1, targetBrightness / 50)) {
-                    if (!isCharging) throw new InterruptedException();
-                    GlyphManager.setBrightness(GlyphManager.Glyph.LINE, b);
-                    GlyphManager.setBrightness(GlyphManager.Glyph.DOT, b);
-                    SystemClock.sleep(11);
-                }
-                turnOff();
-
-                SystemClock.sleep(730);
-
             } catch (InterruptedException e) {
+                turnOff();
+            } finally {
                 turnOff();
             }
         });
