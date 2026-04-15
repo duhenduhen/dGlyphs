@@ -161,8 +161,7 @@ public class BatteryGlyphService extends Service {
     }
 
     private void turnOff() {
-        GlyphManager.setBrightness(GlyphManager.Glyph.LINE, 0);
-        GlyphManager.setBrightness(GlyphManager.Glyph.DOT, 0);
+        GlyphManager.resetFrame();
     }
 
     @Override

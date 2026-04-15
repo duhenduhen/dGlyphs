@@ -24,11 +24,8 @@ public class GlyphManager {
         Shell.cmd("echo " + sb + " > " + PATH_ROOT + "/frame_leds_effect").submit();
     }
 
-    public static void toggleAll(boolean turnOn) {
-        int val = turnOn ? MAX_BRIGHTNESS : 0;
-        for (Glyph g : Glyph.values()) {
-            setBrightness(g, val);
-        }
+    public static void resetFrame() {
+        Shell.cmd("echo 0 > " + PATH_ROOT + "/all_leds_effect").submit();
     }
 
     public enum Glyph {

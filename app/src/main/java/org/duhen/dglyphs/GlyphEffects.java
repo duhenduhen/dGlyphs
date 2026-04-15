@@ -66,7 +66,7 @@ public class GlyphEffects {
                 }
             } catch (Exception ignored) {
             } finally {
-                GlyphManager.toggleAll(false);
+                GlyphManager.resetFrame();
             }
         });
         currentThread.start();
@@ -77,7 +77,7 @@ public class GlyphEffects {
             currentThread.interrupt();
             try { currentThread.join(100); } catch (InterruptedException ignored) {}
         }
-        GlyphManager.toggleAll(false);
+        GlyphManager.resetFrame();
     }
 
     private static void vibrate(Vibrator v, int ms, int amplitude) {
