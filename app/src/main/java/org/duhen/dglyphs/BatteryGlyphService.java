@@ -23,6 +23,8 @@ public class BatteryGlyphService extends Service {
 
     private static final float ACCEL_THRESHOLD = 10.0f;
     private static final float ZFACEDOWN_THRESHOLD = -5.0f;
+    private static final int SENSOR_BATCH_LATENCY_US = 3_000_000;
+
     private SharedPreferences prefs;
     private BatteryManager batteryManager;
     private SensorManager sensorManager;
@@ -92,7 +94,7 @@ public class BatteryGlyphService extends Service {
     private void onPowerConnected() {
         isCharging = true;
         playChargingAnimation(true);
-        sensorManager.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        registerSensorWithBatching();
     }
 
     private void onPowerDisconnected() {
@@ -100,6 +102,15 @@ public class BatteryGlyphService extends Service {
         sensorManager.unregisterListener(sensorListener);
         cancelAnimation();
         turnOff();
+    }
+
+    private void registerSensorWithBatching() {
+        sensorManager.registerListener(
+                sensorListener,
+                accelerometer,
+                SensorManager.SENSOR_DELAY_NORMAL,
+                SENSOR_BATCH_LATENCY_US
+        );
     }
 
     private void playChargingAnimation(boolean wait) {
