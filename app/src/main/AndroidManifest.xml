@@ -9,22 +9,32 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-
     <application
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DGlyphs"
-        android:enableOnBackInvokedCallback="true">
+        android:theme="@style/Theme.DGlyphs">
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.DGlyphs">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
             </intent-filter>
+
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.homepage" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:value="@string/main_header" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_master_qs" />
         </activity>
 
         <activity
@@ -34,10 +44,10 @@
 
         <service
             android:name=".MasterTileService"
+            android:exported="true"
             android:icon="@drawable/ic_master_qs"
             android:label="@string/tile_master_label"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -45,10 +55,10 @@
 
         <service
             android:name=".GlyphTileService"
+            android:exported="true"
             android:icon="@drawable/ic_flashlight_qs"
             android:label="@string/tile_light_label"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -56,10 +66,10 @@
 
         <service
             android:name=".RandomGlyphTileService"
+            android:exported="true"
             android:icon="@drawable/ic_random_glyphs"
             android:label="Random Glyphs"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -72,9 +82,9 @@
 
         <service
             android:name=".GlyphNotificationListener"
+            android:exported="true"
             android:label="dGlyphs Notification Listener"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
-            android:exported="true">
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
