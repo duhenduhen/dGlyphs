@@ -45,4 +45,13 @@
     <string name="battery_glyph_desc">Şarj olurken Glyph parlaklığı pil seviyesini gösterir</string>
     <string name="volume_glyph_label">Glyphs Ses Seviyesi</string>
     <string name="volume_glyph_desc">Glyphs üzerinden görsel ses seviyesi göstergesi</string>
+    <string name="extra_title">Ekstralar</string>
+    <string name="other">Diğer</string>
+    <string name="extra_desc">Diğer bölümlere girmeyen ek ayarlar.</string>
+    <string name="extra_torch_brightness_title">El feneri parlaklığı</string>
+    <string name="extra_torch_brightness_desc">Glyph kutucuğu Hızlı Ayarlar panelinden açıldığında kullanılacak parlaklık seviyesini belirler.</string>
+    <string name="brightness_low">Düşük</string>
+    <string name="brightness_medium">Orta</string>
+    <string name="brightness_high">Yüksek</string>
+    <string name="brightness_max">Maksimum</string>
 </resources>

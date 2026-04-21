@@ -46,4 +46,13 @@
     <string name="battery_glyph_desc">Яркасць Glyph адлюстроўвае ўзровень зараду пры падключэнні зараднай прылады</string>
     <string name="volume_glyph_label">Гучнасць Glyphs</string>
     <string name="volume_glyph_desc">Візуальная індыкацыя ўзроўню гучнасці ў Glyphs</string>
+    <string name="extra_title">Дадаткова</string>
+    <string name="other">Іншае</string>
+    <string name="extra_desc">Дадатковыя налады, якія не ўвайшлі ў іншыя раздзелы.</string>
+    <string name="extra_torch_brightness_title">Яркасць ліхтарыка</string>
+    <string name="extra_torch_brightness_desc">Задае ўзровень яркасці, які выкарыстоўваецца плітой Glyph пры ўключэнні з панэлі хуткіх налад.</string>
+    <string name="brightness_low">Нізкая</string>
+    <string name="brightness_medium">Сярэдняя</string>
+    <string name="brightness_high">Высокая</string>
+    <string name="brightness_max">Максімум</string>
 </resources>

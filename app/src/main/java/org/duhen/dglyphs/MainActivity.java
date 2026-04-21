@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isMasterAllowed;
     private int currentBrightness;
 
-    private MaterialCardView cardNotifications, cardRingtones, cardFlipStyle, cardTurnOff, cardSleepTime, cardBrightness, cardBattery, cardVolume;
+    private MaterialCardView cardNotifications, cardRingtones, cardFlipStyle, cardTurnOff, cardSleepTime, cardBrightness, cardBattery, cardVolume, cardExtra;
     private TextView textCurrentCallStyle, textCurrentNotifStyle, textSleepTime;
     private MaterialSwitch switchSleepMode, switchAll, switchFlip, switchBattery, switchLockscreenOnly, switchVolume;
     private BrightnessSliderView slider;
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         cardBrightness = findViewById(R.id.cardBrightness);
         cardBattery = findViewById(R.id.cardBattery);
         cardVolume = findViewById(R.id.cardVolume);
+        cardExtra = findViewById(R.id.cardExtra);
 
         textCurrentCallStyle = findViewById(R.id.textCurrentCallStyle);
         textCurrentNotifStyle = findViewById(R.id.textCurrentNotifStyle);
@@ -209,6 +210,9 @@ public class MainActivity extends AppCompatActivity {
             quickTick(15, 100);
             prefs.edit().putBoolean("lockscreen_only", isChecked).apply();
         });
+
+        cardExtra.setOnClickListener(v ->
+                startActivity(new Intent(this, ExtraActivity.class)));
 
         setupLogicSwitches();
 
@@ -332,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateCardStates(boolean enabled) {
         float alpha = enabled ? 1.0f : 0.5f;
-        MaterialCardView[] cards = {cardNotifications, cardRingtones, cardBrightness, cardFlipStyle, cardSleepTime, cardTurnOff, cardBattery, cardVolume};
+        MaterialCardView[] cards = {cardNotifications, cardRingtones, cardBrightness, cardFlipStyle, cardSleepTime, cardTurnOff, cardBattery, cardVolume, cardExtra};
         for (MaterialCardView c : cards) {
             c.setEnabled(enabled);
             c.setAlpha(alpha);

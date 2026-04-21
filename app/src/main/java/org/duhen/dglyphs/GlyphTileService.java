@@ -48,7 +48,7 @@ public class GlyphTileService extends TileService {
         boolean newState = !currentActive;
 
         prefs.edit().putBoolean("is_glyph_active", newState).apply();
-        updateHardware(newState ? prefs.getInt("brightness", 2048) : 0);
+        updateHardware(newState ? prefs.getInt("torch_brightness", 2048) : 0);
 
         tile.setState(newState ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
         tile.updateTile();

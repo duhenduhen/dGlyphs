@@ -46,4 +46,13 @@
     <string name="battery_glyph_desc">Яркость Glyph отображает уровень заряда при подключении зарядки</string>
     <string name="volume_glyph_label">Glyph громкость</string>
     <string name="volume_glyph_desc">Визуальная индикация громкости</string>
+    <string name="extra_title">Дополнительно</string>
+    <string name="other">Другое</string>
+    <string name="extra_desc">Дополнительные настройки, не вошедшие в другие разделы.</string>
+    <string name="extra_torch_brightness_title">Яркость фонарика</string>
+    <string name="extra_torch_brightness_desc">Задаёт уровень яркости, который используется плиткой Glyph</string>
+    <string name="brightness_low">Низкая</string>
+    <string name="brightness_medium">Средняя</string>
+    <string name="brightness_high">Высокая</string>
+    <string name="brightness_max">Максимум</string>
 </resources>

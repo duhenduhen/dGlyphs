@@ -46,4 +46,13 @@
     <string name="battery_glyph_desc">Glyph brightness shows battery level while charging</string>
     <string name="volume_glyph_label">Volume Glyph</string>
     <string name="volume_glyph_desc">Visual volume level indicator</string>
+    <string name="extra_title">Extra</string>
+    <string name="other">Other</string>
+    <string name="extra_desc">Additional settings that don\'t fit anywhere else.</string>
+    <string name="extra_torch_brightness_title">Torch brightness</string>
+    <string name="extra_torch_brightness_desc">Sets the brightness level used by the Glyph tile when toggled on from the Quick Settings panel.</string>
+    <string name="brightness_low">Low</string>
+    <string name="brightness_medium">Medium</string>
+    <string name="brightness_high">High</string>
+    <string name="brightness_max">Max</string>
 </resources>
