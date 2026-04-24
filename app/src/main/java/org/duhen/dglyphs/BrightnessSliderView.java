@@ -5,8 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.AttrRes;
 
 public class BrightnessSliderView extends View {
 
@@ -23,6 +26,14 @@ public class BrightnessSliderView extends View {
     public BrightnessSliderView(Context context, AttributeSet attrs, int defStyle) { super(context, attrs, defStyle); }
 
     private float dp(float v) { return v * getResources().getDisplayMetrics().density; }
+
+    private int getThemeColor(@AttrRes int attrRes) {
+        TypedValue typedValue = new TypedValue();
+        if (getContext().getTheme().resolveAttribute(attrRes, typedValue, true)) {
+            return typedValue.data;
+        }
+        return Color.WHITE;
+    }
 
     public float getValue() { return value; }
 
@@ -45,9 +56,10 @@ public class BrightnessSliderView extends View {
         float pad = dp(21f);
         float w = getWidth() - pad * 2;
 
-        paint.setColor(Color.WHITE);
+        paint.setColor(getThemeColor(com.google.android.material.R.attr.colorOnSurfaceVariant));
         paint.setStrokeWidth(dp(2.5f));
         paint.setStrokeCap(Paint.Cap.ROUND);
+
         canvas.drawLine(pad, cy, pad + w, cy, paint);
 
         for (int i = 0; i < 4; i++) {
