@@ -216,16 +216,16 @@ public class MainActivity extends AppCompatActivity {
         switchBattery.setOnCheckedChangeListener((v, isChecked) -> {
             VibratorUtils.quickTick(vibrator, 15, 100);
             prefs.edit().putBoolean("battery_glyph_enabled", isChecked).apply();
-            Intent intent = new Intent(this, BatteryGlyphService.class);
-            if (isChecked && isMasterAllowed) startService(intent);
-            else stopService(intent);
+            if (isChecked && isMasterAllowed)
+                ServiceManager.startIfEnabled(this, prefs, "battery_glyph_enabled", BatteryGlyphService.class);
+            else ServiceManager.stop(this, BatteryGlyphService.class);
         });
         switchVolume.setOnCheckedChangeListener((v, isChecked) -> {
             VibratorUtils.quickTick(vibrator, 15, 100);
             prefs.edit().putBoolean("volume_glyph_enabled", isChecked).apply();
-            Intent intent = new Intent(this, VolumeGlyphService.class);
-            if (isChecked && isMasterAllowed) startService(intent);
-            else stopService(intent);
+            if (isChecked && isMasterAllowed)
+                ServiceManager.startIfEnabled(this, prefs, "volume_glyph_enabled", VolumeGlyphService.class);
+            else ServiceManager.stop(this, VolumeGlyphService.class);
         });
         switchLockscreenOnly.setOnCheckedChangeListener((v, isChecked) -> {
             VibratorUtils.quickTick(vibrator, 15, 100);
@@ -241,10 +241,10 @@ public class MainActivity extends AppCompatActivity {
             VibratorUtils.quickTick(vibrator, 15, 100);
             prefs.edit().putBoolean("flip_enabled", isChecked).apply();
             if (isMasterAllowed) {
-                Intent intent = new Intent(this, FlipToGlyphService.class);
-                if (isChecked) startService(intent);
+                if (isChecked)
+                    ServiceManager.startIfEnabled(this, prefs, "flip_enabled", FlipToGlyphService.class);
                 else {
-                    stopService(intent);
+                    ServiceManager.stop(this, FlipToGlyphService.class);
                     updateHardware(0);
                 }
             }
@@ -258,16 +258,9 @@ public class MainActivity extends AppCompatActivity {
             if (!isChecked) {
                 GlyphEffects.stop();
                 updateHardware(0);
-                stopService(new Intent(this, FlipToGlyphService.class));
-                stopService(new Intent(this, BatteryGlyphService.class));
-                stopService(new Intent(this, VolumeGlyphService.class));
+                ServiceManager.stopAll(this);
             } else {
-                if (prefs.getBoolean("flip_enabled", false))
-                    startService(new Intent(this, FlipToGlyphService.class));
-                if (prefs.getBoolean("battery_glyph_enabled", false))
-                    startService(new Intent(this, BatteryGlyphService.class));
-                if (prefs.getBoolean("volume_glyph_enabled", false))
-                    startService(new Intent(this, VolumeGlyphService.class));
+                ServiceManager.startAll(this, prefs);
             }
             updateTile();
         });
