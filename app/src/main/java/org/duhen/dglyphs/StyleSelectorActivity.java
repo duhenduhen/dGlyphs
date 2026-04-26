@@ -143,8 +143,8 @@ public class StyleSelectorActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         if (viewPager == null || items == null) return;
         int pos = viewPager.getCurrentItem();
         if (pos >= 0 && pos < items.size()) {
@@ -153,7 +153,6 @@ public class StyleSelectorActivity extends AppCompatActivity {
                     .putInt(vibModeKey(), (int) seekVibration.getValue())
                     .apply();
         }
-        setResult(RESULT_OK);
     }
 
     @Override
