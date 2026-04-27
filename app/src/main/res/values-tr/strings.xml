@@ -56,4 +56,6 @@
     <string name="brightness_max">Maksimum</string>
     <string name="style_unknown">Bilinmiyor</string>
     <string name="vibration_intensity">Titreşim yoğunluğu</string>
+    <string name="extra_torch_limiter_title">Parlaklık sınırlayıcı</string>
+    <string name="extra_torch_limiter_desc">Aşırı ısınmayı önlemek için Glyph el fenerinin parlaklığını 1.5 dakika sonra 70% düşürür. Yalnızca maksimum parlaklıkta çalışır</string>
 </resources>

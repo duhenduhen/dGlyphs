@@ -57,4 +57,6 @@
     <string name="brightness_max">Максімум</string>
     <string name="style_unknown">Невядомы</string>
     <string name="vibration_intensity">Інтэнсіўнасць вібрацыі</string>
+    <string name="extra_torch_limiter_title">Абмежавальнік яркасці</string>
+    <string name="extra_torch_limiter_desc">Памяншае яркасць Glyph ліхтарыка да 70% пасля 1,5 хвілін для прадухілення перагрэву. Працуе толькі пры максімальнай яркасці ліхтарыка</string>
 </resources>

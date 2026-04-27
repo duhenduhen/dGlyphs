@@ -2,20 +2,18 @@ package org.duhen.dglyphs;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.color.DynamicColors;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 public class ExtraActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private Vibrator vibrator;
-
     private TextView textTorchBrightnessLevel;
 
     @Override
@@ -27,8 +25,7 @@ public class ExtraActivity extends AppCompatActivity {
         prefs = getSharedPreferences(getString(R.string.pref_file), MODE_PRIVATE);
         vibrator = getSystemService(Vibrator.class);
 
-        ImageButton btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
         BrightnessSliderView sliderTorch = findViewById(R.id.sliderTorchBrightness);
         textTorchBrightnessLevel = findViewById(R.id.textTorchBrightnessLevel);
@@ -44,6 +41,13 @@ public class ExtraActivity extends AppCompatActivity {
                 VibratorUtils.quickTick(vibrator, 15, 100);
                 prefs.edit().putInt("torch_brightness", mapPositionToBrightness(value)).apply();
             }
+        });
+
+        MaterialSwitch switchLimiter = findViewById(R.id.switchTorchLimiter);
+        switchLimiter.setChecked(prefs.getBoolean("torch_limiter_enabled", false));
+        switchLimiter.setOnCheckedChangeListener((v, isChecked) -> {
+            VibratorUtils.quickTick(vibrator, 15, 100);
+            prefs.edit().putBoolean("torch_limiter_enabled", isChecked).apply();
         });
     }
 
